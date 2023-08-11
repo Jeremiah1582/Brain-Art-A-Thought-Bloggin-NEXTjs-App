@@ -1,4 +1,6 @@
-import '@styles/layout.scss'
+import './styles/globals.css'
+import Navbar from './components/Navbar'
+import Provider from './components/Provider'
 
 export const metadata ={
     title: "Prompted_Search",
@@ -6,16 +8,16 @@ export const metadata ={
 }
 
 
-const layout = () => {
+const RootLayout = ({children}) => {
   return (
     <html>
         <body>
             <div className="main">
-                <div className="gradient">
-
-                </div>
+                <div className="gradient"/>
                 <main className="app">
+                <Navbar />
                     {children}
+                    
                 </main>
             </div>
         </body>
@@ -23,4 +25,4 @@ const layout = () => {
   )
 }
 
-export default layout
+export default RootLayout
