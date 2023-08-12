@@ -1,25 +1,153 @@
-"use client"
-import Link from 'next/link'
-import Image from 'next/image'
-import { useState,useEffect } from 'react'
-import {signIn, signOut, useSession} from 'next-auth'
-import logo from "app/public/assets/images/grid.svg"
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import logo from "../public/assets/images/logo.svg";
+import profIcon from "../public/assets/images/profile.png";
+import { set } from "mongoose";
+
 function Navbar() {
-  return (
-    <nav className="flex-between w-full mb-16 pt-3">Navbar
-    
-    <Link 
-        href="/" 
-        className="flex gap-2 flex-center"/>
-        <Image 
-        src="https://th.bing.com/th/id/R.572e4f51d0a4d67669784df53026b5a7?rik=lv9i04y8yl33Dg&riu=http%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2f3%2f33%2fVanamo_Logo.png&ehk=Ix3NOUWRAegY6L3gmUWwTNm0Gee%2faq3jB0ZwGhiKFRk%3d&risl=&pid=ImgRaw&r=0"
-        alt="logo"
-        width={30}
-        height={30}
-        className="object-contain"
-        />
-    </nav>
-  )
+  const isUserLoggedIn = true;
+  const [providers, setProviders]=useState(null); // providers refers to the providers we have in our next auth config file i.e. google, facebook, twitter etc
+
+//   dropdown menu for mobile
+const [toggleDropDown, setToggleDropDown] = useState(false)
+
+const handleToggleDropDown = () => {
+    setToggleDropDown((prev)=>!prev)
 }
 
-export default Navbar
+  // this allows us to sign in using next auth
+  useEffect(() => {
+    const getAndSetProviders = async () => {
+        const response = await getProviders();
+        setProviders(response);
+      };
+      getAndSetProviders();
+  }, []);
+
+
+  return (
+   
+    <nav className="flex-between w-full mb-16 pt-0">
+      <Link href="/" className="flex gap-2 flex-center">
+        {/* app logo */}
+        <Image
+          src={logo}
+          alt="logo"
+          width={30}
+          height={30}
+          className="object-contain"
+        />
+        <p className="logo_text">Prompt Search</p>
+      </Link>
+
+      {/* desktop navigation */}
+      <div className="sm:flex hidden">
+        {isUserLoggedIn ? (
+          <div className="flex gap-3 md:gap-5 ">
+            <Link 
+            href="/create-prompt" 
+            className="black_btn">
+               Create Post
+            </Link>
+
+            <button 
+            type='button' 
+            onClick={signOut} className="outline_btn">
+              Sign Out{" "}
+            </button>
+
+            <Link href="/profile">
+            <Image
+              src={profIcon}
+              className="rounded-full "
+              height={37}
+              width={37}
+              alt="profile"
+              onClick={handleToggleDropDown} //recommended way to toggle state to prevent unpredictability
+            />
+            </Link>
+
+          </div>
+        ) : (
+          //  providers need to be configured in next auth config file
+          <>
+            {" "}
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
+                  Sign in 
+                </button>
+              ))}
+          </>
+        )}
+      </div>
+
+
+      {/* mobile navigation */}
+      <div className="sm:hidden flex relative">
+        {isUserLoggedIn ? (
+          <div className="flex">
+            <Image
+              src={profIcon}
+              className="rounded-full"
+              height={37}
+              width={37}
+              alt="profile"
+              onClick={handleToggleDropDown} //recommended way to toggle state to prevent unpredictability
+            />
+            {toggleDropDown && (
+                <div className="dropdown">
+                    <Link href='/profile'
+                    className="dropdown_link"
+                    onClick={()=>setToggleDropDown(false)}>
+                        My Profile
+                    </Link>
+                    <Link href='/create-prompt'
+                    className="dropdown_link"
+                    onClick={()=>setToggleDropDown(false)}>
+                        Create Prompt
+                    </Link>
+                    <button 
+                    type="button"
+                    className="mt-5 w-full black_btn" 
+                    onClick={()=>{
+                        setToggleDropDown(false)
+                        signOut();
+                    }
+                        }> 
+              Sign Out{" "}
+            </button>
+
+                </div>
+            )
+            }
+          </div>
+        ) : (
+          <>
+            {" "}
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
+                  Sign In with
+                  {provider.name}
+                </button>
+              ))}
+          </>
+        )}
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;
