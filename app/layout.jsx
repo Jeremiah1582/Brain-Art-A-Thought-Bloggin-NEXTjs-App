@@ -1,31 +1,29 @@
+"use client";
+import Nav from "./components/Nav";
+import Provider from "./components/Provider";
+import "./styles/globals.css";
 
-import Navbar from './components/Navbar'
-import Provider from './components/Provider'
-import './styles/globals.css'
+export const metadata = {
+  title: "Prompted Search",
+  description: "discover and share ai prompts",
+};
 
-export const metadata ={
-    title: "Prompted_Search",
-    description: "discover and share ai prompts"
-}
-
-
-const RootLayout = ({children}) => {
+const RootLayout = ({ children }) => {
   return (
-    <html>
-        <body>
-            <Provider>
-            <div className="main">
-                <div className="gradient"/>
-                <main className="app">
-                <Navbar />
-                    {children}
-                    
-                </main>
+    <html lang="en">
+      <body>
+        <Provider>
+          <div className="main">
+            <div className="gradient"/>
             </div>
-            </Provider>
-        </body>
+            <main className="app">
+              <Nav />
+              {children}
+            </main>
+        </Provider>
+      </body>
     </html>
-  )
-}
+  );
+};
 
-export default RootLayout
+export default RootLayout;

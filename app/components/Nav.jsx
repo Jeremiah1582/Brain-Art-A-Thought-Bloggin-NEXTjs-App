@@ -7,7 +7,7 @@ import logo from "../public/assets/images/logo.svg";
 import profIcon from "../public/assets/images/profile.png";
 import { set } from "mongoose";
 
-function Navbar() {
+function Nav() {
   const isUserLoggedIn = true;
   const [providers, setProviders]=useState(null); // providers refers to the providers we have in our next auth config file i.e. google, facebook, twitter etc
 
@@ -30,7 +30,7 @@ const handleToggleDropDown = () => {
 
   return (
    
-    <nav className="flex-between w-full mb-16 pt-0">
+    <nav className="z-10 flex-between w-full mb-16 pt-0">
       <Link href="/" className="flex gap-2 flex-center">
         {/* app logo */}
         <Image
@@ -150,4 +150,4 @@ const handleToggleDropDown = () => {
   );
 }
 
-export default Navbar;
+export default Nav;
