@@ -9,7 +9,6 @@ import profIcon from "../public/assets/images/profile.png";
 function Nav() {
   const [providers, setProviders] = useState(null); // providers refers to the providers we have in our next auth config file i.e. google, facebook, twitter etc
   const { data: session } = useSession();
-  console.log("providers is...", providers);
   //   dropdown menu for mobile
   const [toggleDropDown, setToggleDropDown] = useState(false);
 
@@ -25,17 +24,17 @@ function Nav() {
     // Declare the async function
     const fetchProvidersData = async () => {
       const response = await getProviders();
-      console.log("CDCD", response);
       setProviders(response); // Use response.providers instead of respons
     };
 
     // Call the async function
     fetchProvidersData();
   }, []);
-
+   
   return (
     <nav className="z-10 flex-between w-full mb-16 pt-0">
       <Link href="/" className="flex gap-2 flex-center">
+         
         {/* app logo */}
         <Image
           src={logo}
@@ -61,7 +60,7 @@ function Nav() {
 
             <Link href="/profile">
               <Image
-                src={profIcon}
+                src={session?.user.image}
                 className="rounded-full "
                 height={37}
                 width={37}
@@ -79,7 +78,7 @@ function Nav() {
                 <button
                   type="button"
                   key={provider.name}
-                  onClick={() => signIn(provider.id)}
+                  onClick={() =>signIn(provider.id)}
                   className="black_btn"
                 >
                   Sign in
@@ -94,7 +93,7 @@ function Nav() {
         {session?.user ? (
           <div className="flex">
             <Image
-              src={profIcon}
+              src={session?.user.image}
               className="rounded-full"
               height={37}
               width={37}
@@ -140,8 +139,7 @@ function Nav() {
                   onClick={() => signIn(provider.id)}
                   className="black_btn"
                 >
-                  Sign In with
-                  {provider.name}
+                  Sign In
                 </button>
               ))}
           </>
