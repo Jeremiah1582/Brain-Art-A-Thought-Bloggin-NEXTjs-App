@@ -1,9 +1,11 @@
-'use client'
-import React from "react";
-import { SessionProvider } from "next-auth/react"; //this is a hook that allows us to access the session object
+'use client';
 
-export default function Provider({ children, session }) {
-  return <SessionProvider session={session}>
+import { SessionProvider } from "next-auth/react";
+
+const Provider = ({ children, session }) => (
+  <SessionProvider session={session}>
     {children}
-    </SessionProvider>;
-}
+  </SessionProvider>
+)
+
+export default Provider;
