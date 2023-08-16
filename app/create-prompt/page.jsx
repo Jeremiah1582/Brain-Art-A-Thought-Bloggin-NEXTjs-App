@@ -7,8 +7,9 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'
 
 function CreatePrompt() {
-  const router = useRouter();
+  const router = useRouter(); //what does useRouter() do? 
   const {data: session} = useSession()
+
 const [submitting, setSubmitting] = useState(false)
 const [post, setPost] = useState({
   prompt:'', 
