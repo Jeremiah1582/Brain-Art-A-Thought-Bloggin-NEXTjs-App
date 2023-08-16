@@ -30,7 +30,6 @@ const handler = NextAuth({
   async signIn({profile}) {
     // the session is created after the user signs in automatically by next-auth in the background. we can access the session object in the session hook
     try { 
-      
       await connectToDatabase();
       // check if user exists in the database using the email from the profile object
       const userExists = await User.findOne({ email: profile.email });
@@ -41,6 +40,9 @@ const handler = NextAuth({
           userName: profile.name.replace(" ", "").toLowerCase(),
           image: profile.picture,
         });
+        return true;
+      }
+      else{
         return true;
       }
     } catch (error) {
