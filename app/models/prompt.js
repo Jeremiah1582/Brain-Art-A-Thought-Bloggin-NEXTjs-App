@@ -10,7 +10,7 @@ const promptSchema = new Schema({
         required: [true, 'Please add a prompt'] // [] allows us to add a custom message
     },
     tag: {
-        type:String, 
+        type:[String,], 
         required:[ true ,  'Please add a tag']
     },
     // date: {type: Date, default: Date.now},

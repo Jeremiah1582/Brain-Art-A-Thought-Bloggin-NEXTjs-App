@@ -12,7 +12,7 @@ export const POST = async (req) =>{
       const newPrompt = await new Prompt({
             userId,
             prompt,
-            tag
+            tag: tagsArray
         })
         console.log('new/route.js ',newPrompt);
         await newPrompt.save();

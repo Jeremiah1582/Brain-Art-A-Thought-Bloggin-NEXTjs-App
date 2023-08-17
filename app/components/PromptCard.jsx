@@ -13,10 +13,10 @@ function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
 }
   return (
     <div className="prompt_card"
-    key={post.userId.id}>
+    key={post.userId?.id}>
       <div className="flex justify-between items-start gap-5">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
-          {post.userId.image ? (
+          {post.userId?.image ? (
             <Image
               src={post.userId.image}
               alt="user_image"
@@ -27,7 +27,7 @@ function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
           ) : null}
           <div className="flex flex-col">
             <h3 className="font-satoshi font-semibold text-gray-400">
-              {post.userId.userName}
+              {post.userId?.userName}
             </h3>
            
           </div>
