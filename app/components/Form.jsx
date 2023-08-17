@@ -2,7 +2,8 @@
 import Link from 'next/link'
 
 function Form({type,post,submitting,setPost,handleSubmit}) {
-  return (
+ 
+    return (
     <section className='w-full max-w-full flex-col flex-start'>
         <h1 className="head_text text-left">
         <span className="blue_gradient">{type} Post</span>
@@ -26,11 +27,16 @@ function Form({type,post,submitting,setPost,handleSubmit}) {
                 Prompt Tag
                 <span className="font-normal">( #design #tech #web_dev)</span>
             </span>
-            <textarea  
+            <textarea
             placeholder='#tag'
             required
-            className='form_input' value={post.tag}
-            onChange={(e)=>setPost({...post,tag:e.target.value})}></textarea>
+            className='form_input' 
+            value={post.tag}
+            onChange={(e)=>setPost({...post,tag:e.target.value})}
+            >
+
+            </textarea>
+
         </label>
 
         {/* buttons */}
@@ -41,12 +47,7 @@ function Form({type,post,submitting,setPost,handleSubmit}) {
         <button type='submit'
         disable={submitting}
         className="px-5 py-2 text-sm bg-primary-orange rounded-full text-white">
-            <Link href='/' className='text-sm'> 
-            
             {submitting? `${type}...`:type}  {/* dynamic button text */}
-          
-            
-            </Link>
         </button>
         </div>
         </form>

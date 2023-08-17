@@ -1,7 +1,7 @@
 'use client'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from '../components/Form'
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'
@@ -12,15 +12,28 @@ function CreatePrompt() {
 
 const [submitting, setSubmitting] = useState(false)
 const [post, setPost] = useState({
-  prompt:'', 
-  tag: '',
+  prompt:'',
+  tag:''
 })
+
+useEffect(() => {
+  console.log(post);
+}, [post])
+
+
+// const handleTags=(e)=>{
+//   console.log(e.target.value);
+//     setPost({...post,
+//       tag:[...post,e.target.value]
+//     })
+//     console.log('tags are...',post.tags);
+// }
 
 const createMyPrompt = async (e) => {
 e.preventDefault()
 setSubmitting(true);
 console.log('createMyPrompt...',post.prompt,
-session?.user.id,post.tag,);
+session?.user.id, post.tag,);
 try {
 
   const res = await fetch('/api/prompt/new', {
@@ -28,10 +41,9 @@ try {
     body: JSON.stringify({
       prompt: post.prompt,
       userId: session?.user.id,
-      tag: post.tag,
+      tag: post.tag
     }),
   })
-  console.log('res.status...',res.status);
   if (res.ok) {
     router.push('/'); // redirect to home page
   console.log('success saved prompt');
@@ -39,7 +51,6 @@ try {
 }catch (error) {
   console.log(error);
 } finally {
-  
   setSubmitting(false);
   }
 }
@@ -51,6 +62,7 @@ try {
     submitting={submitting}
     setPost={setPost}
     handleSubmit={createMyPrompt}
+    // handleTags={handleTags}
     />
   );
 };

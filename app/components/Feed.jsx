@@ -8,7 +8,7 @@ function PromptCardList({data, handleTagClick}) {
 
   return (
     <div className='prompt_layout mt-16'>
-      {data.map(
+      {data && data.map(
         (prompt) => (
         <PromptCard
           key={prompt._id}
@@ -57,7 +57,7 @@ function Feed() {
   }, [])
 
   return (
-    <section ClassName='feed'>
+    <section className='feed'>
       {session?.user ?(
       <h1>your feed</h1>):(null)}
     <form action="" className="relative w-full flex-center ">
@@ -69,6 +69,7 @@ function Feed() {
       className="search_input peer"
       />
     </form>
+
         <PromptCardList
         data={allPosts}
         // handleTagClick={handleTagClick}

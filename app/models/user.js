@@ -9,7 +9,7 @@ email: {
 userName:{
     type: String,
     required: true,
-    match: [/^[a-zA-Z0-9]+$/, 'user name is invalid, please include letters a-z or A-Z '],
+    match: [/^[a-zA-Z0-9]+$/, 'user name is invalid, please include letters a-z or A-Z '], 
 },
 image:{
     type: String,
