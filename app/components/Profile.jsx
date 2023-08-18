@@ -1,9 +1,23 @@
 'use client'
-import React from 'react'
+import PromptCardList from './PromptCardList'
 
-function Profile() {
+function Profile({name, desc, data, handleEdit, handleDelete}) {
+  console.log(data);
   return (
-    <div>Profile</div>
+    <section className='w-full'>
+    
+    
+      <h1 className="head_text text-left">
+      <span className="blue_gradient">{name} Profile </span>
+      </h1>
+      <p className="desc text-left">{desc}</p>
+   
+      <PromptCardList
+      data={data}
+      {...handleEdit && (handleEdit={handleEdit})} //this is how we can customize the properties of a component
+      {...handleDelete && (handleDelete={handleDelete})}
+      />
+    </section>
   )
 }
 

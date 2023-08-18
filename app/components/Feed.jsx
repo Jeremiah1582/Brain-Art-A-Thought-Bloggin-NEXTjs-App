@@ -2,30 +2,12 @@
 
 import {useState, useEffect} from 'react'
 import {useSession} from 'next-auth/react'
-import PromptCard from './PromptCard'
-
-function PromptCardList({data, handleTagClick}) {
-
-  return (
-    <div className='prompt_layout mt-16'>
-      {data && data.map(
-        (prompt) => (
-        <PromptCard
-          key={prompt._id}
-          post={prompt}
-          handleTagClick={handleTagClick}
-        />
-      ))}
-    </div>
-  )
-}
-
+import PromptCardList from '../components/PromptCardList'
 
 function Feed() {
   const [searchText, setSearchText] = useState('')
   const [allPosts, setAllPosts] = useState([])
   const [searchResults, setSearchResults] = useState([]);
-
   const {data: session} = useSession();
 
   const handleSearchChange = (e) => {
@@ -41,12 +23,14 @@ function Feed() {
       console.log('fetchPosts...', res);
       
       if (!res.ok) {
+        
         throw new Error('Failed to fetch your posts');
+      }else{
+        const data = await res.json();
+        console.log(data);
+        setAllPosts(data);
       }
   
-      const data = await res.json();
-      console.log(data);
-      setAllPosts(data);
     } catch (error) {
       console.log('failed to fetch posts', error);
     }
@@ -72,7 +56,8 @@ function Feed() {
 
         <PromptCardList
         data={allPosts}
-        // handleTagClick={handleTagClick}
+        handleTagClick={handleTagClick}
+        
         />
     </section>
   )

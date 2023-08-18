@@ -1,16 +1,22 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import useSession from "next-auth/react";
+import {useSession} from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 
 function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
+  const { data: session } = useSession();
   const [copied, setCopied] = useState("");
-  const handleCopy = () => {
+  
+
+  const handleCopy = () => { //this function copies the text to clip board
   setCopied(post.prompt)
     navigator.clipboard.writeText(post.prompt)
     setTimeout(()=>setCopied(''),3000)
-}
+  }
+  
+
+
   return (
     <div className="prompt_card"
     key={post.userId?.id}>
@@ -46,12 +52,31 @@ function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
         </div>
       </div>
       <p className="my-4 font-inter text-sm text-gray-800">{post.prompt}</p>
-      <p className='my-4 placeholder:cursor-pointer font-inter text-sm blue-gradient' 
-      onClick={()=>handleClick && handleTagClick(post.tag)}>
-        {post.tag}
-      </p>
+      {post.tag? post.tag.map((tag) => (
+  
+          <span className='text-gray-400 w-fit mx-4 cursor-pointer font-inter text-sm blue-gradient' 
+      onClick={()=>handleTagClick && handleTagClick(tag)}>
+       {tag}
+      </span>
+
+      )) : null}
+      {/* below condition only allows the edit and delete button to be visible on the profile page as the props are being passed to the component dynamically */}
+       {(session?.user.id === post.userId._id) && handleEdit && handleDelete? (
+        <div className="mt-5 flex flex-end">
+
+          <span className=' font-inter mx-4 text-sm green_gradient cursor-pointer' 
+        onClick={()=>handleEdit(post)}> Edit</span>
+        <span className='font-inter text-sm orange_gradient cursor-pointer' 
+        onClick={()=>handleDelete(post)}> delete</span>
+        </div>
+        
+
+
+      ):null }
+    
     </div>
   );
 }
 
 export default PromptCard;
+ 

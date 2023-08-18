@@ -13,21 +13,12 @@ function CreatePrompt() {
 const [submitting, setSubmitting] = useState(false)
 const [post, setPost] = useState({
   prompt:'',
-  tag:''
+  tag:'' //string of tags is converted to an array in the back end
 })
 
 useEffect(() => {
   console.log(post);
 }, [post])
-
-
-// const handleTags=(e)=>{
-//   console.log(e.target.value);
-//     setPost({...post,
-//       tag:[...post,e.target.value]
-//     })
-//     console.log('tags are...',post.tags);
-// }
 
 const createMyPrompt = async (e) => {
 e.preventDefault()
