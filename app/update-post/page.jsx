@@ -15,7 +15,32 @@ const [post, setPost] = useState({
   prompt:'',
   tag:'' //string of tags is converted to an array in the back end
 })
-
+const updateMyPrompt = async (e) => {
+  e.preventDefault()
+  setSubmitting(true);
+if(!promptId){
+  return alert('promptId is missing')
+} //if there is no promptId, then don't do anything
+  try {
+    
+  
+    const res = await fetch(`/api/prompt/${promptId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        prompt: post.prompt,   
+        tag: post.tag
+      }),
+    })
+    if (res.ok) {
+      router.push('/'); // redirect to home page
+    console.log('success saved prompt');
+    }
+  }catch (error) {
+    console.log(error);
+  } finally {
+    setSubmitting(false);
+    }
+  }
 const getPromptDetails = async () => {
     try {
         const res = await fetch(`/api/prompt/${promptId}`);
@@ -44,7 +69,7 @@ useEffect(() => {
     post={post}
     submitting={submitting}
     setPost={setPost}
-    handleSubmit={()=>{}}
+    handleSubmit={updateMyPrompt}
     // handleTags={handleTags}
     />
   );
