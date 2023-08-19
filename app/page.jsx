@@ -7,9 +7,9 @@ const Home = () => {
       <h1 className='head_text text-center'>
         discover & share
         <br className="max-md:hidden" />
-        <span className="orange_gradient"> AI-Powered Prompts</span>
+        <span className="purple_gradient"> Whats on your mind</span>
       </h1>
-      <p className="desc text-center">PromptShare is a platform where you can search share and save all your favourite AI prompts</p>
+      <p className="desc text-center">A blogging platform for people that want to share a short burst of creativity</p>
 {/* feed */}
 
 <Feed/>

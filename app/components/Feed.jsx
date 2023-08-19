@@ -43,7 +43,7 @@ function Feed() {
   return (
     <section className='feed'>
       {session?.user ?(
-      <h1>your feed</h1>):(null)}
+      <h1 className='font-satoshi text-gray-500'>Explore the Feed</h1>):(null)}
     <form action="" className="relative w-full flex-center ">
       <input type="text" 
       placeholder='Search for a tag or userName'
