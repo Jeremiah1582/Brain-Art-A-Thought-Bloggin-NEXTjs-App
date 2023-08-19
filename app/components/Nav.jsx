@@ -46,6 +46,7 @@ function Nav() {
         <p className="logo_text ">Brain Fart</p>
       </Link>
 
+
       {/* desktop navigation */}
       <div className="sm:flex hidden">
         {session?.user ? (
