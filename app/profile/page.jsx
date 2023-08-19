@@ -6,23 +6,10 @@ import Profile from "../components/Profile";
 
 
 function MyProfile() {
+ const [myPosts, setMyPosts] = useState([])
  const {data:session}=useSession();
  const router = useRouter();
-
-  const handleEdit = async (post) => {
-   router.push(`/update-post?id=${post._id}`);
-  };
-
-  const handleDelete = async (post) => {
-
-  };
-
-
- 
-
-    const [myPosts, setMyPosts] = useState([])
-  console.log('myPosts...', myPosts);
-
+// GET
 const fetchPosts = async () => {
     console.log(session?.user.id);
     if (session?.user.id) {
@@ -42,7 +29,29 @@ const fetchPosts = async () => {
         console.error('no session id, therefore unable to fetchPosts ');
     }
   };
+// EDIT /UPDATE
+const handleEdit = async (post) => {
+  router.push(`/update-post?id=${post._id}`);
+ };
 
+// DELETE
+ const handleDelete = async (currentPost) => {
+   const hasConfirmed = confirm("Are you sure you want to delete this post?"); //confirm is a function built into the Browser  
+   if (hasConfirmed) {
+     try {
+       const res = await fetch(`/api/prompt/${currentPost._id.toString()}/`, {
+         method:'DELETE'
+       });
+     } catch (error) {
+       console.log('delete function failed',error);
+     }
+     const filteredPosts = myPosts.filter((post) => post._id !== currentPost._id);
+     setMyPosts(filteredPosts);
+    
+   }  
+    
+   
+ };
   useEffect(() => {
         fetchPosts() 
   }, []);

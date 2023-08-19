@@ -41,9 +41,10 @@ export const PATCH= async (req,{params})=>{
 }
 // delete
 export const DELETE= async (req,{params})=>{
+    console.log('delete function params...',params);
     try {
         await connectToDatabase();
-        const existingPrompt = await Prompt.findByIdAn(params.id);
+        const existingPrompt = await Prompt.findByIdAndDelete(params.id);
         if (!existingPrompt) {
             return new Response(JSON.stringify({msg:'prompt not found'}), { status: 404 })
         }
