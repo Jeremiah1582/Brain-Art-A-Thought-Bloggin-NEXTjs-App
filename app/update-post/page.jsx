@@ -15,17 +15,6 @@ const [post, setPost] = useState({
   prompt:'',
   tag:'' //string of tags is converted to an array in the back end
 })
-useEffect(() => {
-if(promptId){
-    getPromptDetails()
-}
-}, [promptId])
-
-
-useEffect(() => {
-  console.log(post);
-}, [post])
-
 
 const getPromptDetails = async () => {
     try {
@@ -43,6 +32,12 @@ const getPromptDetails = async () => {
         console.log("failed to fetch prompt", error);
     }
 }
+useEffect(() => {
+  if(promptId){
+      getPromptDetails()
+  }
+  }, [promptId])
+  
   return (
     <Form
     type='Edit'
