@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-import logo from "../public/assets/images/logo.svg";
+import logo from "../public/assets/images/logo.png";
 import profIcon from "../public/assets/images/profile.png";
 
 function Nav() {
@@ -39,8 +39,8 @@ function Nav() {
         <Image
           src={logo}
           alt="logo"
-          width={30}
-          height={30}
+          width={50}
+          height={50}
           className="object-contain"
         />
         <p className="logo_text">Prompt Search</p>
