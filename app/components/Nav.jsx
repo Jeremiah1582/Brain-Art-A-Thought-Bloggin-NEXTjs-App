@@ -43,7 +43,7 @@ function Nav() {
           height={50}
           className="object-contain"
         />
-        <p className="logo_text">Blog Search</p>
+        <p className="logo_text ">Brain Fart</p>
       </Link>
 
       {/* desktop navigation */}
