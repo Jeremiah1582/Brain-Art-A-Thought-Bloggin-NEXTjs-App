@@ -39,7 +39,7 @@ const handleEdit = async (post) => {
    const hasConfirmed = confirm("Are you sure you want to delete this post?"); //confirm is a function built into the Browser  
    if (hasConfirmed) {
      try {
-       const res = await fetch(`/api/prompt/${currentPost._id.toString()}/`, {
+       await fetch(`/api/prompt/${currentPost._id.toString()}/`, {
          method:'DELETE'
        });
      } catch (error) {
@@ -59,7 +59,7 @@ const handleEdit = async (post) => {
   return (
     <Profile
       name="My"
-      desc="welcome to my profile page"
+      desc="Everything to do with you"
       data={myPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
