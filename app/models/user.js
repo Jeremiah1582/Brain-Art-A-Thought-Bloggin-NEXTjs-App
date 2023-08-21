@@ -11,6 +11,10 @@ userName:{
     required: true,
     match: [/^[a-zA-Z0-9]+$/, 'user name is invalid, please include letters a-z or A-Z '], 
 },
+// platformName:{
+//     type: String,
+//     match: [/^[a-zA-Z0-9]+$/, 'please make sure your user name on the platform is Unique'], 
+// },
 image:{
     type: String,
 }

@@ -3,11 +3,12 @@
 import PromptCard from "./PromptCard"
 
 function PromptCardList({data, handleTagClick, handleEdit, handleDelete}) {
-console.log(data);
+
     return (
       <div className='prompt_layout mt-16'>
         
-        {data && data.map(
+        {!data.length < 1 ? 
+          data.map(
           (prompt) => (
           <PromptCard
             key={prompt._id}
@@ -19,7 +20,7 @@ console.log(data);
             handleDelete={handleDelete}
           />
 
-        ))}
+        )):(null)}
       </div>
     )
   }

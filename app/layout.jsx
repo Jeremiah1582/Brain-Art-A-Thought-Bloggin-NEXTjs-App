@@ -1,11 +1,11 @@
-"use client";
+
 import Nav from "./components/Nav";
 import Provider from "./components/Provider";
 import "./styles/globals.css";
 
 export const metadata = {
-  title: "Prompted Search",
-  description: "discover and share ai prompts",
+  title: "Brain Art",
+  description: " A blog where you can discover and share your creative thoughts",
 };
 
 const RootLayout = ({ children }) => {

@@ -5,7 +5,10 @@ import Prompt from '@/app/models/prompt.js'
 export const POST = async (req) =>{
     const {userId, prompt, tag } = await req.json();
     // console.log('POST func...',userId, prompt, tags);
-    const tagsArray = await tag.split(/\s+/).map(tag=>tag.startsWith('#')? tag.toLowerCase():'#'+tag.toLowerCase() )
+    const tagsArray = tag.split(/\s+/)
+  .filter(t => t.length > 0)
+  .map(tag => tag.startsWith('#') ? tag.toLowerCase().trim() : '#' + tag.toLowerCase().trim());
+
     console.log('this is the tags turned into array....',tagsArray);
     try {
     await connectToDatabase() //we have to connect to the database everytime we want to use it because we are using serverless/lambda functions that are stateless (they die after they are used)

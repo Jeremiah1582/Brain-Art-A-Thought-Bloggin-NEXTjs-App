@@ -5,10 +5,12 @@ import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import logo from "../public/assets/images/logo.png";
 import profIcon from "../public/assets/images/profile.png";
+import { useRouter } from "next/navigation";
 
 function Nav() {
   const [providers, setProviders] = useState(null); // providers refers to the providers we have in our next auth config file i.e. google, facebook, twitter etc
   const { data: session } = useSession();
+  const router = useRouter();
   //   dropdown menu for mobile
   const [toggleDropDown, setToggleDropDown] = useState(false);
 
@@ -31,6 +33,10 @@ function Nav() {
     fetchProvidersData();
   }, []);
    
+  useEffect(() => {
+    // direct route back to home page if user is signs out
+    router.push('/')
+  },[signOut] )
   return (
     <nav className="z-10 flex-between w-full mb-16 pt-0">
       <Link href="/" className="flex gap-2 flex-center">
@@ -43,7 +49,7 @@ function Nav() {
           height={50}
           className="object-contain"
         />
-        <p className="logo_text ">Brain Fart</p>
+        <p className="logo_text ">Brain Art</p>
       </Link>
 
 
@@ -136,6 +142,7 @@ function Nav() {
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
+                  key={provider.name}
                   type="button"
                   onClick={() => signIn(provider.id)}
                   className="black_btn"

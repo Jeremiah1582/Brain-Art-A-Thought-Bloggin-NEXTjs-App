@@ -16,10 +16,6 @@ const [post, setPost] = useState({
   tag:'' //string of tags is converted to an array in the back end
 })
 
-useEffect(() => {
-  console.log(post);
-}, [post])
-
 const createMyPrompt = async (e) => {
 e.preventDefault()
 setSubmitting(true);

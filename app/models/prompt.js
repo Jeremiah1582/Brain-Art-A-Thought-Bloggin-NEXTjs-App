@@ -13,7 +13,9 @@ const promptSchema = new Schema({
         type:[String,], 
         required:[ true ,  'Please add a tag']
     },
-    // date: {type: Date, default: Date.now},
+    love: {type:Number, default:0},
+    date: {type: Date, default: Date.now},
+    
 })
 
 const Prompt = models.Prompt || model('Prompt', promptSchema); // More efficient: if model exist use it else create a new model based on the promptSchema schema

@@ -1,3 +1,4 @@
+'use client'
 import Feed from './components/Feed'
 
 const Home = () => {
@@ -7,9 +8,9 @@ const Home = () => {
       <h1 className='head_text text-center'>
         Discover & Share
         <br className="max-md:hidden" />
-        <span className="purple_gradient"> Your Thoughts </span>
+        <span className="purple_gradient"> Creative Thoughts </span>
       </h1>
-      <p className="desc text-center">A blogging platform for people that want to share a short burst of creativity</p>
+      <p className="desc text-center">A blogging platform for people who want to share creative thoughts that might inspire something great</p>
 {/* feed */}
 
 <Feed/>

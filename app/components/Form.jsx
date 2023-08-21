@@ -14,9 +14,10 @@ function Form({type,post,submitting,setPost,handleSubmit}) {
         className='mt-10 w-full max-w-2x1 flex flex-col gap-7 glassmorphism'> 
         <label>
             <span className='font-satoshi font-semibold text-base text-grey-700'>
-                Your AI Prompt
+               Keep it Short, Keep it Sweet
             </span>
             <textarea  
+            maxLength={380}
             placeholder='Enter your prompt here'
             required
             className='form_textarea' value={post.prompt}
@@ -24,10 +25,11 @@ function Form({type,post,submitting,setPost,handleSubmit}) {
         </label>
         <label>
             <span className='font-satoshi font-semibold text-base text-grey-700'>
-                Prompt Tag
+                Post Tag
                 <span className="font-normal">( #design #tech #web_dev)</span>
             </span>
             <textarea
+            maxLength={80}
             placeholder='#tag'
             required
             className='form_input' 
