@@ -94,7 +94,7 @@ function Feed() {
       >
         <input
           type="text"
-          placeholder="Search for a tag or userName"
+          placeholder="Search via tag or keyword"
           value={searchText}
           onChange={handleSearchChange}
           required

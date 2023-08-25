@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 
 function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
+  const router = useRouter();
   const { data: session } = useSession();
   const [copied, setCopied] = useState("");
 
@@ -16,11 +17,18 @@ function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
 
     setTimeout(() => setCopied(""), 3000);
   };
+// when profile name or image is clicked it will route to the profile page of the user who created the post
+  const handleRouteToProfile=(post)=>{
+    console.log(post);
+    router.push(`/profile/?id=${post.userId._id}`)
+  }
 
   return (
     <div className="prompt_card" key={post.userId?.id}>
       <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+        <div 
+        
+        className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           {post.userId?.image ? (
             <Image
               src={post.userId.image}
@@ -28,10 +36,12 @@ function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
               width={40}
               height={40}
               className="rounded-full object-contain"
+              onClick={()=> handleRouteToProfile(post)}
             />
           ) : null}
           <div className="flex flex-col">
-            <h3 className="font-satoshi font-semibold text-gray-400">
+            <h3 className="font-satoshi font-semibold text-gray-400"
+            onClick={()=> handleRouteToProfile(post)}>
               {post.userId?.userName}
             </h3>
           </div>
