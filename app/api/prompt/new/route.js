@@ -9,7 +9,6 @@ export const POST = async (req) =>{
   .filter(t => t.length > 0)
   .map(tag => tag.startsWith('#') ? tag.toLowerCase().trim() : '#' + tag.toLowerCase().trim());
 
-    console.log('this is the tags turned into array....',tagsArray);
     try {
     await connectToDatabase() //we have to connect to the database everytime we want to use it because we are using serverless/lambda functions that are stateless (they die after they are used)
       const newPrompt = await new Prompt({

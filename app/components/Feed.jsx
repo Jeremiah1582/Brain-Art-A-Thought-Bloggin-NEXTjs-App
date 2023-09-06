@@ -55,6 +55,7 @@ function Feed() {
   };
 
   const handleTagClick = (clickedTag) => {
+    
     const keyword = clickedTag.slice(1);
     const result = allPosts.filter((post) =>post.tag.some((tag) =>tag.slice(1).toLowerCase().includes(keyword.toLowerCase())
   ) ); 
