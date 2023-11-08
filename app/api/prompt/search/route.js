@@ -1,10 +1,12 @@
 // GET all prompts related to input, be it Tag, Prompt or User
-import { connectToDatabase } from "../../../utils/database";
-import Prompt from "../../../models/prompt";
+import { connectToDatabase } from "../../../../app/utils/database";
+import Prompt from "../../../../app/models/prompt";
 
-export const GET = async (req, { params }) => {
-    const { input } = params;
+// export const GET = async (req, { params }) => {
+export const GET = async (req,  params ) => {
     try {
+    const { input } = params;
+   
         await connectToDatabase();
         await Prompt.find({ $or: [{ prompt: { $regex: input, $options: "i" } }, { tag: { $regex: input, $options: "i" } }] })
         .populate('userId')

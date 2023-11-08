@@ -16,9 +16,11 @@
     "mongoose": "^7.4.2",
     "next": "^13.4.15",
     "next-auth": "^4.22.5",
-    "postcss": "8.4.27",
+    "postcss": "^8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.32.6",
+    "supports-color": "^8.1.1",
     "tailwindcss": "3.3.3"
   }
 }

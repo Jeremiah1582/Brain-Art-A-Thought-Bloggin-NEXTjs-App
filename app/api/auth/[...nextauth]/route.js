@@ -2,8 +2,8 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 // you must also create new project on google cloud platform and enable the google+ api
-import { connectToDatabase } from "../../../utils/database";
-import User from "../../../models/user";
+import { connectToDatabase } from "../../../../app/utils/database";
+import User from "../../../../app/models/user";
 
 
 const handler = NextAuth({

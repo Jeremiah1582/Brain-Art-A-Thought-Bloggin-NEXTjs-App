@@ -1,7 +1,5 @@
 import mongoose from 'mongoose'
 
-
-
 export const connectToDatabase = async () => {
     
     mongoose.set('strictQuery', true) // sets mongoose options: this is to prevent mongoose from using deprecated methods and prevents warnings in the console (recommended)
@@ -12,7 +10,6 @@ export const connectToDatabase = async () => {
     if (!process.env.MONGODB_URI || !process.env.DB_NAME) {
         throw new Error('MONGODB_URI and DB_NAME must be defined');
       }
-
         try {
             await mongoose.connect(process.env.MONGODB_URI,{
                 dbName: process.env.DB_NAME,
