@@ -1,5 +1,5 @@
-import Prompt from "@/app/models/prompt";
-import { connectToDatabase } from "@/app/utils/database";
+import Prompt from "../../models/prompt";
+import { connectToDatabase } from "../../utils/database";
 
 export const GET= async (req,{params})=>{
 // const {userID}=req.json(); 
