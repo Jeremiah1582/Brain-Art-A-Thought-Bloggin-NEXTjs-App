@@ -1,4 +1,4 @@
-import Prompt from "@/app/models/prompt";
+import Prompt from "@/app/models/prompt"; //schema/models
 import { connectToDatabase } from "@/app/utils/database";
 
 // get 

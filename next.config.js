@@ -1,13 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    experimental: {
+    experimental: { //experimental: This field is used to enable experimental features in Next.js. In your case, you’re enabling the appDir feature and adding “mongoose” to the serverComponentsExternalPackages array.
       appDir: true,
       serverComponentsExternalPackages: ["mongoose"],
     },
-    images: {
+    images: {//images: This field is used to specify a list of image domains that you want to use with the Next.js Image component. You’ve specified ‘lh3.googleusercontent.com’ as an image domain.
       domains: ['lh3.googleusercontent.com'],
     },
-    webpack(config) {
+    webpack(config) {//webpack: This field is used to customize the webpack configuration. You’re enabling the topLevelAwait feature in your webpack configuration.
       config.experiments = {
         ...config.experiments,
         topLevelAwait: true,
