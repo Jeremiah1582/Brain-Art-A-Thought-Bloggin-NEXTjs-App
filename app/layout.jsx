@@ -6,7 +6,7 @@ import "./styles/globals.css";
 export const metadata = {
   title: "Brain Art",
   description: "Online open Blogging platform where you can Discover and share your creative thoughts ",
-
+  metadataBase: new URL(process.env.NEXTAUTH_URL || 'http://localhost:3000'),
   openGraph: {
     title: 'Brain Art",',
     description: 'Discover and share your creative thoughts using the Brain Art Blog',
