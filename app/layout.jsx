@@ -11,10 +11,10 @@ export const metadata = {
     title: 'Brain Art",',
     description: 'Discover and share your creative thoughts using the Brain Art Blog',
     type: 'website',
-    url: 'https://www.brainart.co.uk',
+    url: 'https://brain-art-a-thought-bloggin-nex-tjs-app.vercel.app',
     images: [
       {
-        url: '/app/public/assets/images/logo.png',
+        url: '/public/assets/images/logo.png',
         width: 800,
         height: 330,
         alt: 'Brain Art Logo',
