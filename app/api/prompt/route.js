@@ -1,7 +1,7 @@
 import Prompt from "../../../app/models/prompt";
 import { connectToDatabase } from "../../../app/utils/database";
 
-export const GET= async (req,{params})=>{
+export const GET= async ()=>{
 // const {userID}=req.json(); 
 try {
     await connectToDatabase();

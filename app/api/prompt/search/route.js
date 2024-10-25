@@ -1,9 +1,9 @@
 // GET all prompts related to input, be it Tag, Prompt or User
 import { connectToDatabase } from "../../../../app/utils/database";
-import Prompt from "../../../../app/models/prompt";
+import Prompt from '../../../../app/models/prompt';
 
-// export const GET = async (req, { params }) => {
-export const GET = async (req,  params ) => {
+export const GET = async (req, { params }) => {
+// export const GET = async (req,  params ) => {
     try {
     const { input } = params;
    
