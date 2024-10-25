@@ -2,22 +2,26 @@
 import { connectToDatabase } from "../../../../app/utils/database";
 import Prompt from '../../../../app/models/prompt';
 
-export const GET = async (req, { params }) => {
-// export const GET = async (req,  params ) => {
+export const GET = async (request) => {
     try {
-    const { input } = params;
-   
+        // Get the search query from the URL
+        const url = new URL(request.url);
+        const searchText = url.searchParams.get('searchText');
+
         await connectToDatabase();
-        await Prompt.find({ $or: [{ prompt: { $regex: input, $options: "i" } }, { tag: { $regex: input, $options: "i" } }] })
-        .populate('userId')
-        .exec((err, prompts) => {
-            if (err) {
-                return new Response(JSON.stringify({ msg: 'prompt not found' }), { status: 404 })
-            }
-            return new Response(JSON.stringify(prompts), { status: 200 })
-        })
-    } catch (error) {
-        console.error('failed to search and return item',error);
         
+        // Don't use exec() with a callback - use async/await instead
+        const prompts = await Prompt.find({
+            $or: [
+                { prompt: { $regex: searchText, $options: "i" } },
+                { tag: { $regex: searchText, $options: "i" } }
+            ]
+        }).populate('userId');
+
+        return new Response(JSON.stringify(prompts), { status: 200 });
+
+    } catch (error) {
+        console.error('Failed to search and return item:', error);
+        return new Response(JSON.stringify({ msg: 'Failed to search and return item' }), { status: 500 });
     }
 }
