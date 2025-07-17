@@ -1,7 +1,9 @@
 'use client'
+import { memo } from 'react'
 import Link from 'next/link'
 
-function Form({type,post,submitting,setPost,handleSubmit}) {
+// 🎯 OPTIMIZATION: Memoize Form to prevent re-renders during typing
+const Form = memo(function Form({type,post,submitting,setPost,handleSubmit}) {
  
     return (
     <section className='w-full max-w-full flex-col flex-start'>
@@ -55,6 +57,6 @@ function Form({type,post,submitting,setPost,handleSubmit}) {
         </form>
     </section>
   )
-}
+});
 
 export default Form

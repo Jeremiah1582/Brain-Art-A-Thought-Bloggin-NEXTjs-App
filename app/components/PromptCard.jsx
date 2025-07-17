@@ -1,10 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, memo } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 
-function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
+// 🎯 OPTIMIZATION: Memoize component to prevent unnecessary re-renders
+// Only re-renders when post, handleTagClick, handleEdit, or handleDelete change
+const PromptCard = memo(function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
   const router = useRouter();
   const { data: session } = useSession();
   const [copied, setCopied] = useState("");
@@ -12,14 +14,12 @@ function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
   const handleCopy = () => {
     //this function copies the text to clip board
     setCopied(post.prompt);
-   console.log('userName...',post.userId.userName);
     navigator.clipboard.writeText(`' ${post.prompt} '` + '\n' +  `   Quote by ${post.userId.userName}   `);
 
     setTimeout(() => setCopied(""), 3000);
   };
 // when profile name or image is clicked it will route to the profile page of the user who created the post
   const handleRouteToProfile=(post)=>{
-    console.log(post);
     router.push(`/profile/?id=${post.userId._id}`)
   }
 
@@ -100,6 +100,6 @@ function PromptCard({ post, handleTagClick, handleEdit, handleDelete }) {
       ) : null}
     </div>
   );
-}
+});
 
 export default PromptCard;

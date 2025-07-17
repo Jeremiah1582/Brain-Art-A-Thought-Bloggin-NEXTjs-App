@@ -1,8 +1,10 @@
 'use client'
 
+import { memo } from 'react'
 import PromptCard from "./PromptCard"
 
-function PromptCardList({data, handleTagClick, handleEdit, handleDelete}) {
+// 🎯 OPTIMIZATION: Memoize PromptCardList to prevent re-renders when data hasn't changed
+const PromptCardList = memo(function PromptCardList({data, handleTagClick, handleEdit, handleDelete}) {
 
     return (
       <div className='prompt_layout mt-16'>
@@ -23,5 +25,6 @@ function PromptCardList({data, handleTagClick, handleEdit, handleDelete}) {
         )):(null)}
       </div>
     )
-  }
+  });
+  
   export default PromptCardList

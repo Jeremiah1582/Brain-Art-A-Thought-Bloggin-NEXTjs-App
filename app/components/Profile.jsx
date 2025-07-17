@@ -2,7 +2,6 @@
 import PromptCardList from './PromptCardList'
 
 function Profile({name, desc, data, handleEdit, handleDelete}) {
-  console.log(data);
   return (
     <section className='w-full'>
     
